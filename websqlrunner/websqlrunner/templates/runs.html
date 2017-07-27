@@ -1,0 +1,34 @@
+{% extends "_sqlrunner_site_base.html" %}
+
+{% block body_base %}
+    <section class="jumbotron">
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>Script</th>
+                    <th>Run By</th>
+                    <th>Date</th>
+                    <th>Connection Strings</th>
+                    <th>Status</th>
+                </tr>
+                {% for run in run_models %}
+                <tr>
+                    <td>{{ run.script.get_file_name }}</td>
+                    <td>{{ run.user.email }}</td>
+                    <td>{{ run.date }}</td>
+                    <td>{{ run.connstrings }}</td>
+                    <td>
+                    {% if run.status == 'R' %}
+                        <span class="label label-info">Running</span>
+                    {% elif run.status == 'S' %}
+                         <span class="label label-success">Succeed</span>
+                    {% else %}
+                        <span class="label label-danger">Failed</span>
+                    {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+{% endblock %}

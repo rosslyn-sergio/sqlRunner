@@ -1,0 +1,32 @@
+{% extends "_sqlrunner_site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% endblock %}
+
+{% block body_class %}{% endblock %}
+
+{% block body_base %}
+    <section class="jumbotron">
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Created By</th>
+                    <th>File Name</th>
+                    <th></th>
+                </tr>
+                {% for script in scripts %}
+                <tr>
+                    <td>{{ script.name }}</td>
+                    <td>{{ script.description }}</td>
+                    <td>{{ script.createdby.email }}</td>
+                    <td>{{ script.get_file_name }}</td>
+                    <td><a href="{% url 'run' script.id %}" class="btn btn-sm btn-info">Run</a></td>
+                </tr>
+                {% endfor %}                
+            </table>
+        </div>
+    </section>
+{% endblock %}
